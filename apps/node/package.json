@@ -1,0 +1,46 @@
+{
+  "name": "codeshards-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --watch src --exec ts-node src/index.ts",
+    "build": "tsc && cp -r src/generated dist/",
+    "build:lambda": "tsc && zip -r lambda-deployment.zip dist/ node_modules/ package.json",
+    "start": "node dist/index.js",
+    "sam:build": "sam build --use-container",
+    "sam:local": "sam build && sam local start-api --port 8000 --env-vars env.json",
+    "sam:invoke": "sam build && sam local invoke CodeShardsApiFunction --event events/get-users.json --env-vars env.json",
+    "sam:deploy": "sam deploy --guided",
+    "test:local": "ts-node test-local.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.150",
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.0.4",
+    "nodemon": "^3.1.10",
+    "prisma": "^6.10.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.839.0",
+    "@prisma/client": "^6.10.1",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
+    "ms": "^2.1.3",
+    "openai": "^5.8.2",
+    "redis": "^5.5.6"
+  }
+}
